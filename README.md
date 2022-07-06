@@ -1,12 +1,4 @@
-For activating environment.
-```
-source ./environment.sh --activate
-```
-For deactivating environment.
-```
-source ./environment.sh --deactivate
-```
-                                                                              
+                                                                             
 ```
  /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$$$$$  /$$$$$$$$ /$$$$$$$  /$$$$$$$$  /$$$$$$  /$$      /$$
 | $$__  $$|_  $$_/|__  $$__//$$__  $$|__  $$__/| $$__  $$| $$_____/ /$$__  $$| $$$    /$$$
@@ -32,6 +24,16 @@ source ./environment.sh --deactivate
                                                                                           
                                                                                           
 
+```
+
+
+For activating environment.
+```
+source ./environment.sh --activate
+```
+For deactivating environment.
+```
+source ./environment.sh --deactivate
 ```
 
 ### Documentation:
