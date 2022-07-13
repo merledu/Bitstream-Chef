@@ -26,13 +26,42 @@
 
 ```
 
+## Dependencies
+Node JS
+```bash
+apt install nodejs npm
+```
+Python EEL
+```
+pip install eel
+```
+F4PGA - Automated Bitstream Generation Tool
+
+https://f4pga-examples.readthedocs.io/en/latest/getting.html 
+## How to Run
+
+### For First Time
+```bash
+git clone https://github.com/shahzaibk23/Bitsream-Chef.git
+cd Bitsream-Chef
+npm install
+```
+
+### For running the application
+```bash
+source ./environment.sh --activate
+python main.py
+```
+
+
+--------------------------------
 
 For activating environment.
-```
+```bash
 source ./environment.sh --activate
 ```
 For deactivating environment.
-```
+```bash
 source ./environment.sh --deactivate
 ```
 
