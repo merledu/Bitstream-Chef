@@ -1,0 +1,23 @@
+{
+  "name": "bitstream-chef",
+  "version": "1.0.0",
+  "description": "```  /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$$$$$  /$$$$$$$$ /$$$$$$$  /$$$$$$$$  /$$$$$$  /$$      /$$ | $$__  $$|_  $$_/|__  $$__//$$__  $$|__  $$__/| $$__  $$| $$_____/ /$$__  $$| $$$    /$$$ | $$  \\ $$  | $$     | $$  | $$  \\__/   | $$   | $$  \\ $$| $$      | $$  \\ $$| $$$$  /$$$$ | $$$$$$$   | $$     | $$  |  $$$$$$    | $$   | $$$$$$$/| $$$$$   | $$$$$$$$| $$ $$/$$ $$ | $$__  $$  | $$     | $$   \\____  $$   | $$   | $$__  $$| $$__/   | $$__  $$| $$  $$$| $$ | $$  \\ $$  | $$     | $$   /$$  \\ $$   | $$   | $$  \\ $$| $$      | $$  | $$| $$\\  $ | $$ | $$$$$$$/ /$$$$$$   | $$  |  $$$$$$/   | $$   | $$  | $$| $$$$$$$$| $$  | $$| $$ \\/  | $$ |_______/ |______/   |__/   \\______/    |__/   |__/  |__/|________/|__/  |__/|__/     |__/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahzaibk23/Bitstream-Chef.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shahzaibk23/Bitstream-Chef/issues"
+  },
+  "homepage": "https://github.com/shahzaibk23/Bitstream-Chef#readme",
+  "devDependencies": {
+    "electron": "^19.0.8"
+  }
+}

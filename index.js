@@ -1,0 +1,25 @@
+const { app, BrowserWindow } = require('electron');
+
+const createMainWindow = () => {
+
+  const win = new BrowserWindow({show: false,frame:false, webPreferences: {
+            nodeIntegration: true
+    } });
+
+    win.maximize();
+    
+    win.show();
+
+    win.loadURL('http://localhost:8007/main.html');
+  }
+
+
+app.whenReady().then(() => {
+    createMainWindow()
+});
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit()
+});
+
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
