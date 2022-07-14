@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title> Bitsream Chef </title>
+        <link href="bs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+ 
+        <div id="menu-bar" class="d-flex justify-content-between align-items-center">
+            <img src="img/logo.png" alt="logo" class="logo">
+            <img src="img/title.png" alt="title" class="title">
+            <img src="img/cross.png" alt="logo" class="cross">
+           
+        </div>
+        <div class="container">
+
+            <div id="conf-1" class="row">
+                <div class="col-3">
+                    <button class="btn top-btn">
+                        Reset all data
+                        <img src="img/refresh.png" alt="refresh" class="refresh">
+                    </button>
+                </div>
+                <div class="col-6">
+
+                    <div class="multi-button">
+                        <input name="buttons" value="Arty-A7" name="fpga" type="radio" id="arty_a7" >
+                        <label for="arty_a7">
+                        Arty A-7</label>
+                        <input name="buttons" value="Arty-A100" name="fpga" type="radio" id="arty_a100" >
+                        <label for="arty_a100">
+                        Arty A-100</label>
+                        <input name="buttons" value="Zybo-Z7" name="fpga" type="radio" id="zybo" checked="checked">
+                        <label for="zybo">
+                          Zybo Z-7</label>
+                        
+                      </div>
+                    
+                    
+                </div>
+                <div class="col-3">
+                    <button class="btn top-btn" style="margin-left: auto;">
+                        Generate Bitstream
+                        <img src="img/next.png" alt="refresh" class="refresh">
+                    </button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div id="conf-2" class="row">
+                <div class="col-5">
+                    <div class="pink-box">
+                        <h3> Add Design Sources <img src="img/add.png" /> </h3>
+                        <div class="files-box row">
+                            <div class="col-4">
+                                <div class="file-box">
+                                    <img src="img/file.png" />
+                                    <p> source.v </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-5"></div>
+            </div>
+
+        </div>
+
+        <script src="bs/js/bootstrap.min.js"></script>
+    </body>
+</html>
