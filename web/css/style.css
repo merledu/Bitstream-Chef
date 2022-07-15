@@ -147,13 +147,14 @@ body{
 .pink-box{
     background-color: #827397 ;
     border-radius: 15px;
-    padding: 2rem 4rem;
+    padding: 2rem 3rem;
 }
 .pink-box h3{
     color: white;
     font-weight: 400;
     align-items: center;
     display: flex;
+    width: 100%;
 }
 .pink-box h3 img {
     width: 10%;
@@ -176,4 +177,15 @@ body{
 }
 .file-box p {
     font-size: normal;
+}
+.cancel{
+    text-align: right;
+    margin-bottom: -30px;
+    margin-right: -20px;
+}
+.cancel img{
+    width: 30%;
+}
+.spacer{
+    margin-top: 50px;
 }
