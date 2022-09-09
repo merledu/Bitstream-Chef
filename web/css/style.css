@@ -189,3 +189,63 @@ body{
 .spacer{
     margin-top: 50px;
 }
+
+.purple-too input[type=checkbox] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  -moz-appearance: none;
+       appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 0.7em;
+  height: 0.7em;
+  border: 0.08em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  margin-right: 10px;
+}
+
+.purple-too input[type=checkbox]::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #4D4C7D;
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+.purple-too input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+
+.purple-too input[type=checkbox]:focus {
+  outline-offset: max(2px, 0.15em);
+}
+.purple-too h3 {
+  display: flex;
+  align-items: center;
+}
+.purple-too{
+  background-color: #4D4C7D;
+}
+.purple-too p {
+  color: white;
+  margin-top: 30px;
+}
+.purple-too input[type=number]{
+  background-color: #363062;
+  border: none;
+  color: white;
+  width: 13%;
+  text-align: center;
+}
