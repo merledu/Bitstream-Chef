@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require('electron');
 
 const createMainWindow = () => {
 
-  const win = new BrowserWindow({show: false,frame:false, webPreferences: {
+  const win = new BrowserWindow({ webPreferences: {
             nodeIntegration: true
     } });
 
