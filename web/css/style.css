@@ -190,47 +190,41 @@ body{
     margin-top: 50px;
 }
 
-.purple-too input[type=checkbox] {
-  /* Add if not using autoprefixer */
-  -webkit-appearance: none;
-  /* Remove most all native input styles */
-  -moz-appearance: none;
-       appearance: none;
-  /* For iOS < 15 */
-  background-color: var(--form-background);
-  /* Not removed via appearance */
+#virt_clk {
+  appearance: none;
+  background-color: #fff;
   margin: 0;
   font: inherit;
   color: currentColor;
-  width: 0.7em;
-  height: 0.7em;
-  border: 0.08em solid currentColor;
-  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
   transform: translateY(-0.075em);
   display: grid;
   place-content: center;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
-.purple-too input[type=checkbox]::before {
+#virt_clk::before {
   content: "";
-  width: 0.55em;
-  height: 0.55em;
-  border-radius: 50%;
+  width: 0.65em;
+  height: 0.65em;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em #4D4C7D;
-  /* Windows High Contrast Mode */
+  box-shadow: inset 1em 1em #363062;
   background-color: CanvasText;
 }
 
-.purple-too input[type=checkbox]:checked::before {
+#virt_clk:checked::before {
   transform: scale(1);
 }
 
-.purple-too input[type=checkbox]:focus {
+#virt_clk:focus {
   outline-offset: max(2px, 0.15em);
 }
+
+
 .purple-too h3 {
   display: flex;
   align-items: center;
@@ -247,5 +241,78 @@ body{
   border: none;
   color: white;
   width: 13%;
+  text-align: center;
+}
+.disabled h3{
+  color: #cfcfcf3a;
+}
+.disabled p{
+  color: #cfcfcf3a;
+}
+#clock_freq:disabled{
+  color: #cfcfcf3a;
+}
+
+
+
+svg {
+  width: 100%;
+  max-width: 250px;
+  transform: rotate(-90deg);
+}
+svg circle {
+  --track: 2;
+  stroke-width: var(--track);
+  fill: transparent;
+  transition: 0.35s ease;
+}
+svg circle.init {
+  transition: none;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+svg circle.track {
+  stroke: #bbb9b9;
+}
+svg circle.fill {
+  --pi: 0;
+  --diameter: 0;
+  --circumference: calc(var(--pi) * var(--diameter));
+  --offset: 0;
+  transform-origin: 50% 50%;
+  stroke: #4D4C7D;
+  stroke-dasharray: var(--circumference);
+  stroke-dashoffset: calc(var(--circumference) * var(--offset));
+}
+svg circle.pulse {
+  --pi: 0;
+  --diameter: 0;
+  --circumference: calc(var(--pi) * var(--diameter));
+  transform-origin: 50% 50%;
+  stroke: #6771dc;
+  stroke-dasharray: var(--circumference);
+  stroke-dashoffset: var(--circumference);
+  -webkit-animation: pulse 5s ease-in-out infinite;
+          animation: pulse 5s ease-in-out infinite;
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+}
+
+@-webkit-keyframes pulse {
+  25%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  25%, 100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+#progress_bar{
+  margin-top: 30px;
   text-align: center;
 }
