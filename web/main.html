@@ -88,18 +88,68 @@
                         <h3> Map Design Constraints <img src="img/fwd.png" /> </h3>
                     </div>
                     <div class="spacer"></div>
-                    <div class="pink-box purple-too">
-                        <h3> <input type="checkbox" id="virt_clk" /> Add Virtual Clock </h3>
-                        <p>Clock Frequency <input type="number" value="12" min="1" max="100"/> MHz</p>
+                    <div class="pink-box purple-too disabled">
+                        <h3> <input type="checkbox" id="virt_clk" onchange="addVirtClock(event)"/> Add Virtual Clock </h3>
+                        <p>Clock Frequency <input id="clock_freq" disabled type="number" value="12" min="1" max="100"/> MHz</p>
                     </div>
                     <div class="spacer"></div>
                 </div>
                 <div class="col-2" cl></div>
-                <div class="col-5"></div>
+                <div class="col-5">
+                    <div class="pink-box">
+                        <h3> Progress Indicator </h3>
+
+
+                        <div id="progress_bar">
+                            <svg viewBox="0 0 100 100">
+                                <!-- .track(r) should be ((viewboxWidth-trackStrokeWidth)/2)-->
+                                <circle class="track init" r="49" cx="50" cy="50"></circle>
+                                <!-- .fill(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
+                                <circle class="fill init" r="49" cx="50" cy="50"></circle>
+                                <!-- .pulse(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
+                                <circle class="pulse init" r="49" cx="50" cy="50"></circle>
+                              </svg>
+                        </div>
+                        
+                    </div>
+
+                    <div class="spacer"></div>
+                    <div class="pink-box">
+                        <h3> Bitstream File <img src="img/download.png" /> </h3>
+                        <div class="files-box row">
+                            <div class="col-4">
+                                <div class="cancel">
+                                    <img src="img/cancel.png" />
+                                </div>
+                                
+                                <div class="file-box">
+                                    <img src="img/file.png" />
+                                    <p> output.bit </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
         <script src="bs/js/bootstrap.min.js"></script>
+        <script src="js/progress.js" ></script>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript">
+            
+            function addVirtClock(event) {
+                if(event.target.checked){
+                    document.querySelector(".purple-too").classList.remove("disabled");
+                    document.querySelector("#clock_freq").disabled = false;
+
+                } else {
+                    document.querySelector(".purple-too").classList.add("disabled");
+                    document.querySelector("#clock_freq").disabled = true;
+                }
+            }
+        </script>
     </body>
 </html>
