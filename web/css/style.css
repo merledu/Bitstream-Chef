@@ -316,3 +316,7 @@ svg circle.pulse {
   margin-top: 30px;
   text-align: center;
 }
+
+.icon-btn img{
+  width: 50% !important; 
+}

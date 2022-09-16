@@ -57,9 +57,9 @@
             <div id="conf-2" class="row">
                 <div class="col-5">
                     <div class="pink-box">
-                        <h3> Add Design Sources <img src="img/add.png" /> </h3>
-                        <div class="files-box row">
-                            <div class="col-4">
+                        <h3> Add Design Sources <button onclick="eel.getSourceFile()" class="btn icon-btn"><img src="img/add.png" /></button> </h3>
+                        <div id="source-files" class="files-box row">
+                            <!-- <div class="col-4">
                                 <div class="cancel">
                                     <img src="img/cancel.png" />
                                 </div>
@@ -78,7 +78,7 @@
                                     <img src="img/file.png" />
                                     <p> source.v </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -139,6 +139,27 @@
         <script src="js/progress.js" ></script>
         <script type="text/javascript" src="/eel.js"></script>
         <script type="text/javascript">
+
+            eel.expose(updateSourceFilesJS);
+            function updateSourceFilesJS(){
+                var htmlsStr = "";
+                var files=["hi"];
+                for(let i=0;i<files.length;i++){
+                    htmlsStr += ```
+                            <div class="col-4">
+                                <div class="cancel">
+                                    <img src="img/cancel.png" />
+                                </div>
+                                
+                                <div class="file-box">
+                                    <img src="img/file.png" />
+                                    <p> ${files[i][1]} </p>
+                                </div>
+                            </div>
+                                ```
+                }
+                document.getElementById("source-files").innerHTML = htmlsStr;
+            }
             
             function addVirtClock(event) {
                 if(event.target.checked){
