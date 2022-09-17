@@ -3,7 +3,7 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
 
 # top module of RTL
-TOP:=$(TOP_MODULE) #Picofoxy
+TOP:=$(TOP_MODULE)
 
 # verilog source files for bitstream generation
 VERILOG := $(wildcard $(VERILOG_DIR)/*.v)
