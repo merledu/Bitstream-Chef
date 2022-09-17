@@ -3,10 +3,10 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
 
 # top module of RTL
-TOP:=Picofoxy
+TOP:=$(TOP_MODULE) #Picofoxy
 
 # verilog source files for bitstream generation
-VERILOG := $(wildcard $(current_dir)/verilogDirectory/*.v)
+VERILOG := $(wildcard $(VERILOG_DIR)/*.v)
 
 # XDC file for bitstream generation
 # xdcfile := $(current_dir)/extra/Picofoxy.xdc

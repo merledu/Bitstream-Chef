@@ -63,5 +63,12 @@ For deactivating environment.
 source ./environment.sh --deactivate
 ```
 
+--------------------------------
+
+For generating bitstream.
+```bash
+TARGET="arty_35" TOP_MODULE="SoCNow" VERILOG_DIR="../../verilog_dir" make 
+```
+
 ### Documentation:
 https://docs.google.com/document/d/1xByuFOh_SIC23NHe2ZOPA65XLJydzgEiLvRrkp8hrhM/edit?usp=sharing 
