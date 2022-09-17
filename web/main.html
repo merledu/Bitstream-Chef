@@ -8,6 +8,7 @@
     </head>
     <body>
  
+        <section id="main_section" class="clean-block main">
         <div id="menu-bar" class="d-flex justify-content-between align-items-center ">
             <img src="img/logo.png" alt="logo" class="logo">
             <img src="img/title.png" alt="title" class="title">
@@ -26,13 +27,13 @@
                 <div class="col-6">
 
                     <div class="multi-button">
-                        <input name="buttons" value="Arty-A7" name="fpga" type="radio" id="arty_a7" >
+                        <input name="buttons" value="arty-a7-35t" name="fpga" type="radio" id="arty_a7" checked="checked">
                         <label for="arty_a7">
                         Arty A-7</label>
-                        <input name="buttons" value="Arty-A100" name="fpga" type="radio" id="arty_a100" >
+                        <input name="buttons" value="arty-a7-100t" name="fpga" type="radio" id="arty_a100" >
                         <label for="arty_a100">
                         Arty A-100</label>
-                        <input name="buttons" value="Zybo-Z7" name="fpga" type="radio" id="zybo" checked="checked">
+                        <input name="buttons" value="zybo-z7" name="fpga" type="radio" id="zybo" >
                         <label for="zybo">
                           Zybo Z-7</label>
                         
@@ -41,7 +42,7 @@
                     
                 </div>
                 <div class="col-3">
-                    <button class="btn top-btn" style="margin-left: auto;">
+                    <button onclick="generateBitstream()" class="btn top-btn" style="margin-left: auto;">
                         Generate Bitstream
                         <img src="img/next.png" alt="refresh" class="refresh">
                     </button>
@@ -56,20 +57,30 @@
 
             <div id="conf-2" class="row">
                 <div class="col-5">
-                    <div class="pink-box">
-                        <h3> Add Design Sources <button onclick="eel.getSourceFile()" class="btn icon-btn"><img src="img/add.png" /></button> </h3>
+                    <div class="pink-box diff">
+                        <h3> Add Design Sources <img onclick="eel.getSourceFile()" src="img/add.png" class="icon-btn" /></h3>
                         <div id="source-files" class="files-box row">
                             <!-- <div class="col-4">
-                                <div class="cancel">
+                                <div onclick="eel.removeSourceFile('hi')" class="col-4 icon-div">
                                     <img src="img/cancel.png" />
+                                </div>
+                                
+                                <div class="file-box">
+                                    <img src="img/file.png" />
+                                    <p> ${files[i][1]} </p>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-4">
+                                <div class="cancel">
+                                    <button class="btn icon-btn" > <img src="img/cancel.png" /> </button>
                                 </div>
                                 
                                 <div class="file-box">
                                     <img src="img/file.png" />
                                     <p> source.v </p>
                                 </div>
-                            </div>
-                            <div class="col-4">
+                            </div> -->
+                            <!-- <div onclick="" class="col-4 icon-div">
                                 <div class="cancel">
                                     <img src="img/cancel.png" />
                                 </div>
@@ -84,8 +95,8 @@
 
 
                     <div class="spacer"></div>
-                    <div class="pink-box">
-                        <h3> Map Design Constraints <img src="img/fwd.png" /> </h3>
+                    <div class="pink-box diff">
+                        <h3> Map Design Constraints <img src="img/fwd.png" class="icon-btn" onclick="openFPGAMapping()" /> </h3>
                     </div>
                     <div class="spacer"></div>
                     <div class="pink-box purple-too disabled">
@@ -96,30 +107,76 @@
                 </div>
                 <div class="col-2" cl></div>
                 <div class="col-5">
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Progress Indicator </h3>
 
+                        <div class="tags">
+                            <div id="synth">
+                                <img src="img/synth_gray.png" />
+                                <img src="img/synth_blue.png" class="no_tag" />
+                                <img src="img/synth_green.png" class="no_tag" />
+                                <img src="img/synth_red.png" class="no_tag" />
+                                <p> Synthesis </p>
+                                <div class="loading-spinner"></div>
+                            </div>
 
-                        <div id="progress_bar">
-                            <svg viewBox="0 0 100 100">
-                                <!-- .track(r) should be ((viewboxWidth-trackStrokeWidth)/2)-->
-                                <circle class="track init" r="49" cx="50" cy="50"></circle>
-                                <!-- .fill(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
-                                <circle class="fill init" r="49" cx="50" cy="50"></circle>
-                                <!-- .pulse(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
-                                <circle class="pulse init" r="49" cx="50" cy="50"></circle>
-                              </svg>
+                            <div id="pack">
+                                <img src="img/pack_gray.png" />
+                                <img src="img/pack_blue.png" class="no_tag" />
+                                <img src="img/pack_green.png" class="no_tag" />
+                                <img src="img/pack_red.png" class="no_tag" />
+                                <p> Packaging </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="place">
+                                <img src="img/place_gray.png" />
+                                <img src="img/place_blue.png" class="no_tag" />
+                                <img src="img/place_green.png" class="no_tag" />
+                                <img src="img/place_red.png" class="no_tag" />
+                                <p> Placement </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="route" >
+                                <img src="img/route_gray.png" />
+                                <img src="img/route_blue.png" class="no_tag" />
+                                <img src="img/route_green.png" class="no_tag" />
+                                <img src="img/route_red.png" class="no_tag" />
+                                <p> Routing </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="fasm">
+                                <img src="img/fasm_gray.png" />
+                                <img src="img/fasm_blue.png" class="no_tag" />
+                                <img src="img/fasm_green.png" class="no_tag" />
+                                <img src="img/fasm_red.png" class="no_tag" />
+                                <p> Writing FASM </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="bit">
+                                <img src="img/bit_gray.png" />
+                                <img src="img/bit_blue.png" class="no_tag" />
+                                <img src="img/bit_green.png" class="no_tag" />
+                                <img src="img/bit_red.png" class="no_tag" />
+                                <p> Writing Bitstream </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+                            
                         </div>
+                        
                         
                     </div>
 
                     <div class="spacer"></div>
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Bitstream File <img src="img/download.png" /> </h3>
                         <div class="files-box row">
-                            <div class="col-4">
-                                <div class="cancel">
-                                    <img src="img/cancel.png" />
+                            <div id="bit_file" class="col-4">
+                                <div onclick="eel.exportBitstream()" class="cancel">
+                                    <img src="img/internal.png" />
                                 </div>
                                 
                                 <div class="file-box">
@@ -134,19 +191,303 @@
             </div>
 
         </div>
+        </section>
+        
+            
+   <section id="fpga_section" class="clean-block mapFPGA">
+       
+    <div class="row" style="margin-top: 0vh;">
+        <div class="col-md-2">
+            <img src="img/back.png" alt="back" id="backFPGA" onclick="closeFPGAMapping()">
+        </div>
+        <div class="col-md-8" style="height: 100%;text-align: center;">
+            <br>
+            <div class="glass fpga-box" style="border-radius: 15px; backdrop-filter: blur(50px); padding: 40px 45px;border: solid 1px rgba(255, 255, 255, 0.5);">
+                <div style="text-align: left">
+                    <div>
+                        <h4 class="head" style="width: 300px;">
+                            Map I/Os to FPGA
+                        </h4>
+                        <br>
+                        <p class="middle">
+                            Map what SoC pins shall be mapped into FPGA components
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 simple-borders row" style="padding-top: 10px; padding-bottom: 16px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8" >
+                                    Top Module
+
+                                    <label  class="select" for="slct">
+                                        <select onchange="selectTop(event)" id="slct" name={{ comp }} required="required">
+                                        <option id="top_module" value="" disabled="disabled" selected="selected">Select top</option>
+                                        
+                                            <!-- <option value="pre_test_1"> pre_test_1 </option> -->
+                                        
+                                        
+                                    </select><svg>
+                                        <use xlink:href="#select-arrow-down"></use>
+                                    </svg></label><!-- SVG Sprites--><svg class="sprites">
+                                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                                            <polyline points="1 1 5 5 9 1"></polyline>
+                                           </symbol>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        
+                        
+                       
+                        
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <img src="img/fpga/arty.png" style="width:100%;" />
+                            <br><br>
+                                
+                        </div>
+                        <div class="col-md-5 darker-borders"  style="padding-top:15px">
+                            <ul id="gener">
+                                <h6> Mapped IOs </h6>
+                                <!-- <div class="outer-glass-map">
+                                    <img src="img/cancel.png" />
+                                    <div class="glass-map">
+                                        <p> SW1 </p>
+                                        <img src="img/separator.png" />
+                                        <p> in1 </p>
+                                       
+                                    </div>
+                                </div> -->
+                                
+                            </ul>
+                        </div>
+                        
+                        <br>
+                    
+                    </div>
+
+
+                    <br><br>
+                    <div class="row">
+                            
+                        <div class="col-md-12 simple-borders">
+                            <div id="fpga_components" class="container row" style="padding-top:15px;text-align: center;">
+                                
+    
+                               
+
+                            </div>
+
+                            
+
+                            <br>
+                            
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- <a href="{% url 'selectFPGA' %}">  <img src="{% static 'img/boldarrow2.png' %}" style="width: 70%;" /> </a>
+                        <a href="{% url 'programFPGA' %}">  <img src="{% static 'img/boldarrow.png' %}" style="width: 70%;" /> </a> -->
+
+                        <!-- {% comment %} <a onclick="bitstreamLoader('{% url 'bitstream' %}')"> {% endcomment %} -->
+                    </div>
+
+
+                    
+                    
+                   
+                </div>                    
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+            
+        </div>
+
+    </div>
+
+  
 
         <script src="bs/js/bootstrap.min.js"></script>
         <script src="js/progress.js" ></script>
         <script type="text/javascript" src="/eel.js"></script>
         <script type="text/javascript">
 
+            eel.expose(showBitFile);
+            function showBitFile(){
+                document.getElementById("bit_file").style.display = "block";
+            }
+
+            eel.expose(changeStatus);
+            function changeStatus(comp, color){
+                var comp = document.getElementById(comp);
+                comp.classList = color;
+            }
+
+
+            function generateBitstream(){
+                eel.generateBitstream(pinConfigs);
+            }
+
+            
+
+            function closeFPGAMapping(){
+                document.getElementById("fpga_section").style.display = "none";
+                document.getElementById("main_section").style.display = "block";
+            }
+
+            var pinConfigs = [];
+
+            function selectPin(e){
+                var pin = e.target.value;
+                var comp = e.target.name;
+                var pinConfig = {
+                    "pin": pin,
+                    "comp": comp
+                };
+                pinConfigs.push(pinConfig);
+                
+                refershPinMappings();
+            }
+
+            function removePin(comp){
+                var index = pinConfigs.findIndex(x => x.comp === comp);
+                pinConfigs.splice(index, 1);
+                var element = document.getElementsByName(comp);
+                element[0].value = "";
+                refershPinMappings();
+            }
+            
+
+            function refershPinMappings(){
+                document.getElementById("gener").innerHTML = "";
+                for(let i=0;i<pinConfigs.length;i++){
+                    var pin = pinConfigs[i].pin;
+                    var comp = pinConfigs[i].comp;
+                    document.getElementById("gener").innerHTML += `<div class="outer-glass-map">
+                                                                    <img class="pin-remove" onclick="removePin('${comp}')" src="img/cancel.png" />
+                                                                    <div class="glass-map">
+                                                                        <p> ${comp} </p>
+                                                                        <img src="img/separator.png" />
+                                                                        <p> ${pin} </p>
+                                                                    
+                                                                    </div>
+                                                                </div>`;
+                }
+            }
+
+            function selectTop(e){
+                // alert(e.target.value);
+                var top = e.target.value;
+                var fpga = document.querySelector("input[name='buttons']:checked").value;
+                // alert(fpga);
+                eel.selectTop(top, fpga);
+            }
+
+            eel.expose(insertTopModules);
+            function insertTopModules(tops){
+                var select = document.getElementById("slct");
+                tops.forEach(function(top){
+                    var option = document.createElement("option");
+                    option.value = top;
+                    option.innerHTML = top;
+                    select.appendChild(option);
+                });
+            }
+
+            eel.expose(showFPGAMapping);
+            function showFPGAMapping(){
+                
+                var fpga_section = document.getElementById("fpga_section");
+                fpga_section.style.display = "block";
+                var main_section = document.getElementById("main_section");
+                main_section.style.display = "none";
+                // get height of gener
+                var height = document.getElementById("gener").offsetHeight;
+                // alert(height) / /;
+                document.getElementById("gener").style.maxHeight = height + "vh";
+            }
+
+            eel.expose(mapInputs);
+            function mapInputs(inputs, input_comps){
+                // alert(input_comps.length);
+                var htmlStr = "";
+                for(var i=0;i<input_comps.length;i++){
+                    // alert(i);
+                    var htmlSubStr = "";
+                    htmlSubStr += `<div class="col-md-3" style="margin-bottom:10px">
+                                    ${input_comps[i]}
+
+                                    <label  class="select" for="slct">
+                                        <select onchange="selectPin(event)" id="slct" name="${input_comps[i]}" required="required">
+                                        <option value="" disabled="disabled" selected="selected">Select i/o</option>
+                                `;
+                    for(let j=0;j<inputs.length;j++){
+                        htmlSubStr += `<option value="${inputs[j]}"> ${inputs[j]} </option>`;
+                    }
+                    htmlSubStr += `</select><svg>
+                                        <use xlink:href="#select-arrow-down"></use>
+                                    </svg></label><!-- SVG Sprites--><svg class="sprites">
+                                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                                            <polyline points="1 1 5 5 9 1"></polyline>
+                                           </symbol>
+                                    </svg>
+                                </div>
+                                `;
+                    htmlStr += htmlSubStr;
+                    // alert(htmlStr);
+                }
+                
+                document.getElementById("fpga_components").innerHTML = htmlStr;
+            }
+
+            eel.expose(mapOutputs);
+            function mapOutputs(outputs, output_comps){
+                var htmlStr = "";
+                for(let i=0;i<output_comps.length;i++){
+                    var htmlSubStr = "";
+                    htmlSubStr += `<div class="col-md-3" style="margin-bottom:10px">
+                                    ${output_comps[i]}
+
+                                    <label  class="select" for="slct">
+                                        <select onchange="selectPin(event)" id="slct" name="${output_comps[i]}" required="required">
+                                        <option value="" disabled="disabled" selected="selected">Select i/o</option>
+                                `;
+                    for(let j=0;j<outputs.length;j++){
+                        htmlSubStr += `<option value="${outputs[j]}"> ${outputs[j]} </option>`;
+                    }
+                    htmlSubStr += `</select><svg>
+                                        <use xlink:href="#select-arrow-down"></use>
+                                    </svg></label><!-- SVG Sprites--><svg class="sprites">
+                                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                                            <polyline points="1 1 5 5 9 1"></polyline>
+                                           </symbol>
+                                    </svg>
+                                </div>
+                                `;
+                    htmlStr += htmlSubStr;
+                }
+                document.getElementById("fpga_components").innerHTML += htmlStr;
+            }
+
+            function openFPGAMapping(){
+                eel.bringOutFPGAMapping();
+            }
+      
             eel.expose(updateSourceFilesJS);
-            function updateSourceFilesJS(){
+            function updateSourceFilesJS(files){
+                console.log("HII");
                 var htmlsStr = "";
-                var files=["hi"];
+                
                 for(let i=0;i<files.length;i++){
-                    htmlsStr += ```
-                            <div class="col-4">
+                    htmlsStr += `
+                            <div onclick="eel.removeSourceFile('${files[i][0]}')" class="col-4 icon-div">
                                 <div class="cancel">
                                     <img src="img/cancel.png" />
                                 </div>
@@ -156,7 +497,7 @@
                                     <p> ${files[i][1]} </p>
                                 </div>
                             </div>
-                                ```
+                                `;
                 }
                 document.getElementById("source-files").innerHTML = htmlsStr;
             }
