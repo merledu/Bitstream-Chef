@@ -60,4 +60,7 @@ ARTY_COMPS_o = {
     "JD[7]"     :  "set_property -dict { PACKAGE_PIN H2    IOSTANDARD LVCMOS33 } [get_ports { x }];",
     "JD[8]"     :  "set_property -dict { PACKAGE_PIN G2    IOSTANDARD LVCMOS33 } [get_ports { x }];",
 }
-
+XDC_ENCODS = {
+    "default": "## Clock signal \nset_property PACKAGE_PIN E3 [get_ports {clock}] \nset_property IOSTANDARD LVCMOS33 [get_ports {clock}]",
+    "clk":"# Clock constraints \ncreate_clock -period x [get_ports {clock}]",  
+}
