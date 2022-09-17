@@ -439,3 +439,9 @@ svg circle.pulse {
 body{
   overflow-x: hidden;
 }
+#backFPGA{
+  cursor: pointer;
+  width: 15%;
+  margin: 15%;
+  text-align: center;
+}

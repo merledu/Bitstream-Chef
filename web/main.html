@@ -152,6 +152,7 @@
        
     <div class="row" style="margin-top: 0vh;">
         <div class="col-md-2">
+            <img src="img/back.png" alt="back" id="backFPGA" onclick="closeFPGAMapping()">
         </div>
         <div class="col-md-8" style="height: 100%;text-align: center;">
             <br>
@@ -272,16 +273,43 @@
         <script type="text/javascript" src="/eel.js"></script>
         <script type="text/javascript">
 
-            // get height of gener
-            var height = document.getElementById("gener").offsetHeight;
-            document.getElementById("gener").style.maxHeight = height + "vh";
             
+
+            function closeFPGAMapping(){
+                document.getElementById("fpga_section").style.display = "none";
+                document.getElementById("main_section").style.display = "block";
+            }
+
+            var pinConfigs = [];
 
             function selectPin(e){
                 var pin = e.target.value;
                 var comp = e.target.name;
-                document.getElementById("gener").innerHTML += `<div class="outer-glass-map">
-                                                                    <img src="img/cancel.png" />
+                var pinConfig = {
+                    "pin": pin,
+                    "comp": comp
+                };
+                pinConfigs.push(pinConfig);
+                
+                refershPinMappings();
+            }
+
+            function removePin(comp){
+                var index = pinConfigs.findIndex(x => x.comp === comp);
+                pinConfigs.splice(index, 1);
+                var element = document.getElementsByName(comp);
+                element[0].value = "";
+                refershPinMappings();
+            }
+            
+
+            function refershPinMappings(){
+                document.getElementById("gener").innerHTML = "";
+                for(let i=0;i<pinConfigs.length;i++){
+                    var pin = pinConfigs[i].pin;
+                    var comp = pinConfigs[i].comp;
+                    document.getElementById("gener").innerHTML += `<div class="outer-glass-map">
+                                                                    <img class="pin-remove" onclick="removePin('${comp}')" src="img/cancel.png" />
                                                                     <div class="glass-map">
                                                                         <p> ${comp} </p>
                                                                         <img src="img/separator.png" />
@@ -289,6 +317,7 @@
                                                                     
                                                                     </div>
                                                                 </div>`;
+                }
             }
 
             function selectTop(e){
@@ -317,6 +346,10 @@
                 fpga_section.style.display = "block";
                 var main_section = document.getElementById("main_section");
                 main_section.style.display = "none";
+                // get height of gener
+                var height = document.getElementById("gener").offsetHeight;
+                // alert(height) / /;
+                document.getElementById("gener").style.maxHeight = height + "vh";
             }
 
             eel.expose(mapInputs);
