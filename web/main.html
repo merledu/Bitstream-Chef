@@ -57,7 +57,7 @@
 
             <div id="conf-2" class="row">
                 <div class="col-5">
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Add Design Sources <img onclick="eel.getSourceFile()" src="img/add.png" class="icon-btn" /></h3>
                         <div id="source-files" class="files-box row">
                             <!-- <div class="col-4">
@@ -95,7 +95,7 @@
 
 
                     <div class="spacer"></div>
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Map Design Constraints <img src="img/fwd.png" class="icon-btn" onclick="openFPGAMapping()" /> </h3>
                     </div>
                     <div class="spacer"></div>
@@ -107,19 +107,74 @@
                 </div>
                 <div class="col-2" cl></div>
                 <div class="col-5">
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Progress Indicator </h3>
 
-                        
+                        <div class="tags">
+                            <div id="synth" class="green">
+                                <img src="img/synth_gray.png" />
+                                <img src="img/synth_blue.png" class="no_tag" />
+                                <img src="img/synth_green.png" class="no_tag" />
+                                <img src="img/synth_red.png" class="no_tag" />
+                                <p> Synthesis </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="pack" class="red">
+                                <img src="img/pack_gray.png" />
+                                <img src="img/pack_blue.png" class="no_tag" />
+                                <img src="img/pack_green.png" class="no_tag" />
+                                <img src="img/pack_red.png" class="no_tag" />
+                                <p> Packaging </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="place" class="blue">
+                                <img src="img/place_gray.png" />
+                                <img src="img/place_blue.png" class="no_tag" />
+                                <img src="img/place_green.png" class="no_tag" />
+                                <img src="img/place_red.png" class="no_tag" />
+                                <p> Placement </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="route" >
+                                <img src="img/route_gray.png" />
+                                <img src="img/route_blue.png" class="no_tag" />
+                                <img src="img/route_green.png" class="no_tag" />
+                                <img src="img/route_red.png" class="no_tag" />
+                                <p> Routing </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="fasm">
+                                <img src="img/fasm_gray.png" />
+                                <img src="img/fasm_blue.png" class="no_tag" />
+                                <img src="img/fasm_green.png" class="no_tag" />
+                                <img src="img/fasm_red.png" class="no_tag" />
+                                <p> Writing FASM </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+
+                            <div id="bit">
+                                <img src="img/bit_gray.png" />
+                                <img src="img/bit_blue.png" class="no_tag" />
+                                <img src="img/bit_green.png" class="no_tag" />
+                                <img src="img/bit_red.png" class="no_tag" />
+                                <p> Writing Bitstream </p>
+                                <div class="loading-spinner"></div>
+                            </div>
+                            
+                        </div>
                         
                         
                     </div>
 
                     <div class="spacer"></div>
-                    <div class="pink-box">
+                    <div class="pink-box diff">
                         <h3> Bitstream File <img src="img/download.png" /> </h3>
                         <div class="files-box row">
-                            <div class="col-4">
+                            <!-- <div class="col-4">
                                 <div class="cancel">
                                     <img src="img/internal.png" />
                                 </div>
@@ -128,7 +183,7 @@
                                     <img src="img/file.png" />
                                     <p> output.bit </p>
                                 </div>
-                            </div>
+                            </div> -->
                             
                         </div>
                     </div>
