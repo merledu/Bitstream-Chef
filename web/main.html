@@ -42,7 +42,7 @@
                     
                 </div>
                 <div class="col-3">
-                    <button class="btn top-btn" style="margin-left: auto;">
+                    <button onclick="generateBitstream()" class="btn top-btn" style="margin-left: auto;">
                         Generate Bitstream
                         <img src="img/next.png" alt="refresh" class="refresh">
                     </button>
@@ -111,7 +111,7 @@
                         <h3> Progress Indicator </h3>
 
                         <div class="tags">
-                            <div id="synth" class="green">
+                            <div id="synth">
                                 <img src="img/synth_gray.png" />
                                 <img src="img/synth_blue.png" class="no_tag" />
                                 <img src="img/synth_green.png" class="no_tag" />
@@ -120,7 +120,7 @@
                                 <div class="loading-spinner"></div>
                             </div>
 
-                            <div id="pack" class="red">
+                            <div id="pack">
                                 <img src="img/pack_gray.png" />
                                 <img src="img/pack_blue.png" class="no_tag" />
                                 <img src="img/pack_green.png" class="no_tag" />
@@ -129,7 +129,7 @@
                                 <div class="loading-spinner"></div>
                             </div>
 
-                            <div id="place" class="blue">
+                            <div id="place">
                                 <img src="img/place_gray.png" />
                                 <img src="img/place_blue.png" class="no_tag" />
                                 <img src="img/place_green.png" class="no_tag" />
@@ -174,8 +174,8 @@
                     <div class="pink-box diff">
                         <h3> Bitstream File <img src="img/download.png" /> </h3>
                         <div class="files-box row">
-                            <!-- <div class="col-4">
-                                <div class="cancel">
+                            <div id="bit_file" class="col-4">
+                                <div onclick="eel.exportBitstream()" class="cancel">
                                     <img src="img/internal.png" />
                                 </div>
                                 
@@ -183,7 +183,7 @@
                                     <img src="img/file.png" />
                                     <p> output.bit </p>
                                 </div>
-                            </div> -->
+                            </div>
                             
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                                         <select onchange="selectTop(event)" id="slct" name={{ comp }} required="required">
                                         <option id="top_module" value="" disabled="disabled" selected="selected">Select top</option>
                                         
-                                            <option value="pre_test_1"> pre_test_1 </option>
+                                            <!-- <option value="pre_test_1"> pre_test_1 </option> -->
                                         
                                         
                                     </select><svg>
@@ -318,6 +318,22 @@
         <script src="js/progress.js" ></script>
         <script type="text/javascript" src="/eel.js"></script>
         <script type="text/javascript">
+
+            eel.expose(showBitFile);
+            function showBitFile(){
+                document.getElementById("bit_file").style.display = "block";
+            }
+
+            eel.expose(changeStatus);
+            function changeStatus(comp, color){
+                var comp = document.getElementById(comp);
+                comp.classList = color;
+            }
+
+
+            function generateBitstream(){
+                eel.generateBitstream(pinConfigs);
+            }
 
             
 
