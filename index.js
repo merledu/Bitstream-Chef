@@ -4,7 +4,7 @@ const createMainWindow = () => {
 
   const win = new BrowserWindow({ webPreferences: {
             nodeIntegration: true
-    } });
+    }, icon: __dirname + '/web/img/logo.png' });
 
     win.maximize();
     
