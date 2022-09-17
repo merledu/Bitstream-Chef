@@ -244,66 +244,6 @@ body{
 #clock_freq:disabled{
   color: #cfcfcf3a;
 }
-
-
-
-svg {
-  width: 100%;
-  max-width: 250px;
-  transform: rotate(-90deg);
-}
-svg circle {
-  --track: 2;
-  stroke-width: var(--track);
-  fill: transparent;
-  transition: 0.35s ease;
-}
-svg circle.init {
-  transition: none;
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-}
-svg circle.track {
-  stroke: #bbb9b9;
-}
-svg circle.fill {
-  --pi: 0;
-  --diameter: 0;
-  --circumference: calc(var(--pi) * var(--diameter));
-  --offset: 0;
-  transform-origin: 50% 50%;
-  stroke: #4D4C7D;
-  stroke-dasharray: var(--circumference);
-  stroke-dashoffset: calc(var(--circumference) * var(--offset));
-}
-svg circle.pulse {
-  --pi: 0;
-  --diameter: 0;
-  --circumference: calc(var(--pi) * var(--diameter));
-  transform-origin: 50% 50%;
-  stroke: #6771dc;
-  stroke-dasharray: var(--circumference);
-  stroke-dashoffset: var(--circumference);
-  -webkit-animation: pulse 5s ease-in-out infinite;
-          animation: pulse 5s ease-in-out infinite;
-  mix-blend-mode: multiply;
-  opacity: 0.8;
-}
-
-@-webkit-keyframes pulse {
-  25%, 100% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes pulse {
-  25%, 100% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
-}
-
 #progress_bar{
   margin-top: 30px;
   text-align: center;
@@ -444,4 +384,7 @@ body{
   width: 15%;
   margin: 15%;
   text-align: center;
+}
+.icon-btn{
+  cursor: pointer;
 }

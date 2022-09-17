@@ -58,7 +58,7 @@
             <div id="conf-2" class="row">
                 <div class="col-5">
                     <div class="pink-box">
-                        <h3> Add Design Sources <button onclick="eel.getSourceFile()" class="btn icon-btn"><img src="img/add.png" /></button> </h3>
+                        <h3> Add Design Sources <img onclick="eel.getSourceFile()" src="img/add.png" class="icon-btn" /></h3>
                         <div id="source-files" class="files-box row">
                             <!-- <div class="col-4">
                                 <div onclick="eel.removeSourceFile('hi')" class="col-4 icon-div">
@@ -96,7 +96,7 @@
 
                     <div class="spacer"></div>
                     <div class="pink-box">
-                        <h3> Map Design Constraints <button onclick="openFPGAMapping()" class="btn icon-btn"> <img src="img/fwd.png" /> </button> </h3>
+                        <h3> Map Design Constraints <img src="img/fwd.png" class="icon-btn" onclick="openFPGAMapping()" /> </h3>
                     </div>
                     <div class="spacer"></div>
                     <div class="pink-box purple-too disabled">
@@ -110,17 +110,8 @@
                     <div class="pink-box">
                         <h3> Progress Indicator </h3>
 
-
-                        <div id="progress_bar">
-                            <svg viewBox="0 0 100 100">
-                                <!-- .track(r) should be ((viewboxWidth-trackStrokeWidth)/2)-->
-                                <circle class="track init" r="49" cx="50" cy="50"></circle>
-                                <!-- .fill(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
-                                <circle class="fill init" r="49" cx="50" cy="50"></circle>
-                                <!-- .pulse(r) should be ((viewboxWidth-fillStrokeWidth)/2)-->
-                                <circle class="pulse init" r="49" cx="50" cy="50"></circle>
-                              </svg>
-                        </div>
+                        
+                        
                         
                     </div>
 
