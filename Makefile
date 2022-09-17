@@ -22,33 +22,33 @@ BUILDDIR:=build
 
 ifeq ($(TARGET),arty_35)
   PARTNAME := xc7a35tcsg324-1
-  XDC:=~/picofoxy/fpga/arty.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   BOARD_BUILDDIR := ${BUILDDIR}/arty_35
 else ifeq ($(TARGET),arty_100)
   PARTNAME:= xc7a100tcsg324-1
-  XDC:=${current_dir}/arty.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   DEVICE:= xc7a100t_test
   BOARD_BUILDDIR := ${BUILDDIR}/arty_100
 else ifeq ($(TARGET),nexys4ddr)
   PARTNAME:= xc7a100tcsg324-1
-  XDC:=${current_dir}/nexys4ddr.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   DEVICE:= xc7a100t_test
   BOARD_BUILDDIR := ${BUILDDIR}/nexys4ddr
 else ifeq ($(TARGET),zybo)
   PARTNAME:= xc7z010clg400-1
-  XDC:=${current_dir}/zybo.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   DEVICE:= xc7z010_test
   BITSTREAM_DEVICE:= zynq7
   BOARD_BUILDDIR := ${BUILDDIR}/zybo
-  VERILOG:=${current_dir}/counter_zynq.v
+#   VERILOG:=${current_dir}/counter_zynq.v
 else ifeq ($(TARGET),nexys_video)
   PARTNAME:= xc7a200tsbg484-1
-  XDC:=${current_dir}/nexys_video.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   DEVICE:= xc7a200t_test
   BOARD_BUILDDIR := ${BUILDDIR}/nexys_video
 else
   PARTNAME:= xc7a35tcpg236-1
-  XDC:=${current_dir}/basys3.xdc
+  XDC:=${CONS_DIR}/$(CONSTRAINT_FILE).xdc
   BOARD_BUILDDIR := ${BUILDDIR}/basys3
 endif
 

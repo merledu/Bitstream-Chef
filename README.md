@@ -67,7 +67,7 @@ source ./environment.sh --deactivate
 
 For generating bitstream.
 ```bash
-TARGET="arty_35" TOP_MODULE="SoCNow" VERILOG_DIR="../../verilog_dir" make 
+TARGET="arty_35" TOP_MODULE="SoCNow" VERILOG_DIR="../../verilog_dir" CONS_DIR="../../constraints_dir" CONSTRAINT_FILE="anyfile" make 
 ```
 
 ### Documentation:
