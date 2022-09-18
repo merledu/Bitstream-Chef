@@ -1,12 +1,15 @@
-import eel, tkinter, tkinter.filedialog as tkFileDialog, os, time
+import eel, tkinter, tkinter.filedialog as tkFileDialog, os, time, shutil
 from eel import init, start
 from fpga import *
-from utils import *
+from UTILS import utils
 
 
 global source_files, FPGA
 source_files = []
 FPGA = None
+
+shutil.rmtree("build", ignore_errors=True)
+os.mkdir("build")
 
 @eel.expose
 def getSourceFile():
@@ -28,7 +31,10 @@ def removeSourceFile(file):
 
 @eel.expose
 def bringOutFPGAMapping():
-    eel.insertTopModules(["test_top1", "test_top2"])
+    modules = []
+    for file in source_files:
+        modules += utils.extract(file)
+    eel.insertTopModules(modules)
     eel.showFPGAMapping()
 
 @eel.expose
@@ -43,7 +49,8 @@ def selectTop(top, fpga):
 
 @eel.expose
 def generateBitstream(pinConfigs):
-    prepareContraints(pinConfigs, FPGA)
+    utils.prepareContraints(pinConfigs, FPGA)
+    utils.bringSourceFiles(source_files)
 
     # synth
     eel.changeStatus("synth", "blue")
