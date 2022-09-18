@@ -1,12 +1,15 @@
-import eel, tkinter, tkinter.filedialog as tkFileDialog, os, time
+import eel, tkinter, tkinter.filedialog as tkFileDialog, os, time, shutil
 from eel import init, start
 from fpga import *
-from utils import *
+from UTILS import utils
 
 
 global source_files, FPGA
 source_files = []
 FPGA = None
+
+shutil.rmtree("build", ignore_errors=True)
+os.mkdir("build")
 
 @eel.expose
 def getSourceFile():
@@ -16,6 +19,7 @@ def getSourceFile():
     ask_source_files = tkFileDialog.askopenfilenames()
     global source_files
     source_files += root.tk.splitlist(ask_source_files)
+    source_files = list(set(source_files))
     # updateSourceFiles()
     print(source_files)
     eel.updateSourceFilesJS([(i,os.path.basename(i)) for i in source_files])
@@ -28,7 +32,10 @@ def removeSourceFile(file):
 
 @eel.expose
 def bringOutFPGAMapping():
-    eel.insertTopModules(["test_top1", "test_top2"])
+    modules = []
+    for file in source_files:
+        modules += utils.extract(file)
+    eel.insertTopModules(modules)
     eel.showFPGAMapping()
 
 @eel.expose
@@ -36,14 +43,19 @@ def selectTop(top, fpga):
     print(top, fpga)
     global FPGA
     FPGA = fpga
-    # extract pins from top module..
     if fpga == "arty-a7-35t":
-        eel.mapInputs(["test_in1", "test_in2"],list(ARTY_COMPS_i.keys()))
-        eel.mapOutputs(["test_out1", "test_out2"],list(ARTY_COMPS_o.keys()))
+        pins = utils.extractIOs(top)
+        eel.mapInputs( pins[0] ,list(ARTY_COMPS_i.keys()))
+        eel.mapOutputs(pins[1] ,list(ARTY_COMPS_o.keys()))
 
 @eel.expose
-def generateBitstream(pinConfigs):
-    prepareContraints(pinConfigs, FPGA)
+def generateBitstream(pinConfigs, clk_freq, fpga):
+    if fpga == FPGA:
+        utils.prepareContraints(pinConfigs, FPGA, clk_freq)
+    else:
+        utils.makeEmptyContraints(fpga)
+        
+    utils.bringSourceFiles(source_files)
 
     # synth
     eel.changeStatus("synth", "blue")
