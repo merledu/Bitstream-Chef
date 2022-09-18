@@ -8,7 +8,8 @@ class UTILS:
 
     def extract(self, path):
         file = open(path, 'r')
-        return self.use_regex(file.read())
+        data = self.use_regex(file.read())
+        return [dat.split(" ")[1][0:-1] for dat in data]
 
     def use_regex(self, input_text):
         pattern = re.compile(r"module+[\s\n\t]+[a-z_A-Z0-9]+\(", re.IGNORECASE)
@@ -33,6 +34,6 @@ class UTILS:
         file.close()
 
 utils = UTILS()
-# b=a.extract("verilogDirectory/Picofoxy.v")
+# b=utils.extract("verilogDirectory/Picofoxy.v")
 # print(len(b))
 # print(b)
