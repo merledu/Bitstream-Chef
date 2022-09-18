@@ -33,6 +33,8 @@ Python EEL
 ```
 pip install eel
 ```
+sudo apt-get install python3-tk
+```
 F4PGA - Automated Bitstream Generation Tool
 
 https://f4pga-examples.readthedocs.io/en/latest/getting.html 
