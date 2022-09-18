@@ -36,4 +36,7 @@ class UTILS:
         for file in source_files:
             os.system(f"cp {file} build/")
 
+    def extractIOs(self, top):
+        return (["test_in1", "test_in2"], ["test_out1", "test_out2"])
+
 utils = UTILS()
