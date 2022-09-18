@@ -32,6 +32,16 @@ class UTILS:
         file=open(f"build/{FPGA}.xdc", "w+")
         file.write(xdc_str)
         file.close()
+
+    def makeEmptyContraints(self,fpga):
+        while os.path.exists("build/*.xdc"):
+            os.remove("build/*.xdc")
+        if fpga == "arty-a7-35t":
+            FPGA = "arty"
+        file=open(f"build/{FPGA}.xdc", "w+")
+        file.write("")
+        file.close()
+            
     
     def bringSourceFiles(self, source_files):
         for file in source_files:
