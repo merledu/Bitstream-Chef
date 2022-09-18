@@ -31,8 +31,9 @@ class UTILS:
         file=open(f"build/{FPGA}.xdc", "w+")
         file.write(xdc_str)
         file.close()
+    
+    def bringSourceFiles(self, source_files):
+        for file in source_files:
+            os.system(f"cp {file} build/")
 
 utils = UTILS()
-# b=a.extract("verilogDirectory/Picofoxy.v")
-# print(len(b))
-# print(b)
