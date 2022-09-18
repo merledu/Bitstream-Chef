@@ -175,7 +175,7 @@
                         <h3> Bitstream File <img src="img/download.png" /> </h3>
                         <div class="files-box row">
                             <div id="bit_file" class="col-4">
-                                <div onclick="eel.exportBitstream()" class="cancel">
+                                <div onclick="eel.exportBitstream()" class="cancel icon-div">
                                     <img src="img/internal.png" />
                                 </div>
                                 
@@ -332,7 +332,16 @@
 
 
             function generateBitstream(){
-                eel.generateBitstream(pinConfigs);
+                // check if virt_clk is selected
+                
+                var virt_clk = document.getElementById("virt_clk");
+                var clk_freq = 0;
+                if(virt_clk.checked === true){
+                    // get the clock frequency
+                    clk_freq = document.getElementById("clock_freq").value;
+                }
+                var fpga = document.querySelector("input[name='buttons']:checked").value;
+                eel.generateBitstream(pinConfigs, clk_freq, fpga);
             }
 
             
@@ -487,8 +496,8 @@
                 
                 for(let i=0;i<files.length;i++){
                     htmlsStr += `
-                            <div onclick="eel.removeSourceFile('${files[i][0]}')" class="col-4 icon-div">
-                                <div class="cancel">
+                            <div class="col-4">
+                                <div onclick="eel.removeSourceFile('${files[i][0]}')" class="cancel icon-div">
                                     <img src="img/cancel.png" />
                                 </div>
                                 
