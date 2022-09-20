@@ -37,11 +37,7 @@ Python EEL
 ```
 pip install eel
 ```
-Then inside the repo dir, build node_modules
-```
-npm install
-```
-```
+
 F4PGA - Automated Bitstream Generation Tool
 
 https://f4pga-examples.readthedocs.io/en/latest/getting.html 
