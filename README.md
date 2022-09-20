@@ -29,11 +29,18 @@ Node JS
 ```bash
 apt install nodejs npm
 ```
+Tkinter
+```
+apt-get install python3-tk
+```
 Python EEL
 ```
 pip install eel
 ```
-sudo apt-get install python3-tk
+Then inside the repo dir, build node_modules
+```
+npm install
+```
 ```
 F4PGA - Automated Bitstream Generation Tool
 
