@@ -48,6 +48,17 @@ def selectTop(top, fpga):
         eel.mapInputs( pins[0] ,list(ARTY_COMPS_i.keys()))
         eel.mapOutputs(pins[1] ,list(ARTY_COMPS_o.keys()))
 
+def check_status(match_case):
+    while True:
+        file = open("log.txt", "r")
+        content = file.readlines()
+        file.close()
+        if match_case+"\n" in content:
+            break
+        else:
+            time.sleep(5)
+    return
+
 @eel.expose
 def generateBitstream(pinConfigs, clk_freq, fpga):
     if fpga == FPGA:
@@ -59,32 +70,32 @@ def generateBitstream(pinConfigs, clk_freq, fpga):
 
     # synth
     eel.changeStatus("synth", "blue")
-    time.sleep(5)
+    check_status("Synthesis completed")
     eel.changeStatus("synth", "green")
 
     # pack
     eel.changeStatus("pack", "blue")
-    time.sleep(5)
+    check_status("Packaging completed")
     eel.changeStatus("pack", "green")
 
     # place
     eel.changeStatus("place", "blue")
-    time.sleep(5)
+    check_status("Placement completed")
     eel.changeStatus("place", "green")
 
     # route
     eel.changeStatus("route", "blue")
-    time.sleep(5)
+    check_status("Routing completed")
     eel.changeStatus("route", "green")
 
     #fasm
     eel.changeStatus("fasm", "blue")
-    time.sleep(5)
+    check_status("Fasm generation completed")
     eel.changeStatus("fasm", "green")
 
     # bitstream
     eel.changeStatus("bit", "blue")
-    time.sleep(5)
+    check_status("Bitstream generation completed")
     eel.changeStatus("bit", "green")
 
     eel.showBitFile()
