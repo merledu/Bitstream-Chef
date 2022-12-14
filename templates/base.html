@@ -1,0 +1,27 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title> Bitsream Chef </title>
+        
+        <link href="{% static 'bs/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    </head>
+    <body>
+    
+        <section id="main_section" class="clean-block main">
+        <div id="menu-bar" class="d-flex justify-content-between align-items-center ">
+            <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+            <img src="{% static 'img/title.png' %}" alt="title" class="title">
+            <img src="{% static 'img/cross.png' %}" alt="logo" class="cross">
+            
+        </div>                            
+
+{% block content %}
+
+{% endblock %}
+    </body>
+</html>
