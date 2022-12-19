@@ -47,12 +47,14 @@
 
 
 
+    
 
 
     <div id="conf-2" class="row">
         <div class="col-8">
             <div class="pink-box diff">
-                <h3> Add Design Sources <img onclick="eel.getSourceFile()" src="{% static 'img/add.png' %}" class="icon-btn" /></h3>
+                <h3> Add Design Sources <img onclick="document.getElementById('file-input').click()" src="{% static 'img/add.png' %}" class="icon-btn" />
+                    <input type="file" id="file-input" style="display:none" onchange="uploadFile(this.files)"></h3>
                 <div id="source-files" class="files-box row">
                     <!-- <div class="col-4">
                         <div onclick="eel.removeSourceFile('hi')" class="col-4 icon-div">
@@ -125,7 +127,6 @@
                 <p class="middle">
                     Map what SoC pins shall be mapped into FPGA components
                 </p>
-
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 simple-borders row" style="padding-top: 10px; padding-bottom: 16px;">
@@ -242,18 +243,17 @@
     }
 
 
-    function generateBitstream(){
-        // check if virt_clk is selected
-        
+    function generateBitstream() {
+        // Check if virt_clk is selected
         var virt_clk = document.getElementById("virt_clk");
         var clk_freq = 0;
-        if(virt_clk.checked === true){
-            // get the clock frequency
-            clk_freq = document.getElementById("clock_freq").value;
+        if (virt_clk.checked) {
+          // Get the clock frequency
+          clk_freq = document.getElementById("clock_freq").value;
         }
+        // Get the value of the selected radio button
         var fpga = document.querySelector("input[name='buttons']:checked").value;
-        eel.generateBitstream(pinConfigs, clk_freq, fpga);
-    }
+      }
 
     
 
