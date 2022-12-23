@@ -13,10 +13,10 @@
 
     <div id="conf-1" class="row">
         <div class="col-3">
-            <button class="btn top-btn">
+            <button class="btn top-btn" onclick="resetAll()">
                 Reset all data
                 <img src="{% static 'img/refresh.png' %}" alt="refresh" class="refresh">
-            </button>
+              </button>
         </div>
         <div class="col-6">
 
@@ -53,8 +53,11 @@
     <div id="conf-2" class="row">
         <div class="col-8">
             <div class="pink-box diff">
-                <h3> Add Design Sources <img onclick="document.getElementById('file-input').click()" src="{% static 'img/add.png' %}" class="icon-btn" />
+                <h3>Add Design Sources <img onclick="document.getElementById('file-input').click()" src="{% static 'img/add.png' %}" class="icon-btn" />
                     <input type="file" id="file-input" style="display:none" onchange="uploadFile(this.files)"></h3>
+                  <div id="preview-container">
+                    <!-- Previews will be added here -->
+                  </div>
                 <div id="source-files" class="files-box row">
                     <!-- <div class="col-4">
                         <div onclick="eel.removeSourceFile('hi')" class="col-4 icon-div">
@@ -229,7 +232,45 @@
 <script src="{% static 'js/progress.js' %}" ></script>
 <script type="{% static 'text/javascript' %}" src="/eel.js"></script>
 
-<script type="{% static 'text/javascript' %}">
+<script>
+    function resetAll() {
+    // Reset all input values
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+      input.value = "";
+    });
+
+    // Clear any displayed data
+    document.getElementById("preview-container").innerHTML = "";
+  }
+
+  function uploadFile(files) {
+  for (let i = 0; i < files.length; i++) {
+    // Read the file
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(files[i]);
+
+    // When the file is finished reading, display the preview
+    fileReader.onload = function() {
+      // Check if a preview element already exists for this file
+      let preview = document.querySelector(`#preview-${files[i].name}`);
+
+      // If no preview element exists, create one
+      if (!preview) {
+        preview = document.createElement("img");
+        preview.id = `preview-${files[i].name}`;
+        preview.style.maxWidth = "100px";
+        preview.style.maxHeight = "100px";
+        preview.style.backgroundSize = "cover";
+        preview.style.backgroundPosition = "center";
+        document.getElementById("preview-container").appendChild(preview);
+      }
+
+      // Set the background image of the preview element to the file data
+      preview.style.backgroundImage = `url(${this.result})`;
+    }
+  }
+}
 
     eel.expose(showBitFile);
     function showBitFile(){
