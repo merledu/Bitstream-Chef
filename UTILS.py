@@ -1,12 +1,14 @@
 from fpga import *
 import os
 import re
+from icecream import ic
 
 class UTILS:
     def __init__(self):
         pass
 
     def extract(self, path):
+        ic(path)
         file = open(path, 'r')
         data = self.use_regex(file.read())
         file.close()
@@ -25,7 +27,8 @@ class UTILS:
             FPGA = "arty"
         
         xdc_str = XDC_ENCODS["default"] + "\n"
-        xdc_str += XDC_ENCODS["clk"].replace("x", str(clk_freq)) + "\n"
+        if clk_freq != 0:
+            xdc_str += XDC_ENCODS["clk"].replace("x", str(clk_freq)) + "\n"
         for pin in pinConfigs:
             xdc_str += COMPONENTS[pin["comp"]].replace("x", pin["pin"]) + "\n"
 
@@ -52,61 +55,65 @@ class UTILS:
     def moduleContent(self,module):
         pass
 
-    def extractIOs(self, top):
+    def extractIOs(self, top, source_files):
         # return (["test_in1", "test_in2"], ["test_out1", "test_out2"])
-        file= open(f"{GENERATOR_DIR}/{RTL_FILES['fpga']}", "r")
-        content = file.readlines()
-        file.close()
         n = 0
         Inputs = []
         Outputs = []
-        for i in content:
-            if n == 1 :
-                if ")" in i:
-                    n = 0
-                else:
-                    if "input" in i:
-                        newi = i.replace(",", "").split()[-1]
-                        file = open(f"{GENERATOR_DIR}/src/main/scala/config.json", "r")
-                        outData = json.load(file)
-                        file.close()
-                        ic(outData)
-                        if "reset" in newi:
+        for srcfile in source_files:
+            file= open(srcfile, "r")
+            content = file.readlines()
+            file.close()
+            
+            for i in content:
+                if n == 1 :
+                    if ")" in i:
+                        n = 0
+                    else:
+                        if "input" in i:
+                            newi = i.replace(",", "").split()[-1]
+                            # file = open(f"{GENERATOR_DIR}/src/main/scala/config.json", "r")
+                            # outData = json.load(file)
+                            # file.close()
+                            # ic(outData)
+                            # if "reset" in newi:
                             Inputs.append(newi)
-                        elif outData["gpio"] == 1 and "gpio" in newi:
-                            Inputs.append(newi)
-                        elif outData["spi"] == 1 and "spi" in newi:
-                            Inputs.append(newi)
-                        elif outData["uart"] == 1 and "uart" in newi:
-                            Inputs.append(newi)
-                        elif outData["timer"] == 1 and "timer" in newi:
-                            Inputs.append(newi)
-                        elif outData["spi_flash"] == 1 and "spi_flash" in newi:
-                            Inputs.append(newi)
-                        elif outData["i2c"] == 1 and "i2c" in newi:
-                            Inputs.append(newi)
-                    elif "output" in i or "inout" in i:
-                        newi = i.replace(",", "").split()[-1]
-                        file = open(f"{GENERATOR_DIR}/src/main/scala/config.json", "r")
-                        outData = json.load(file)
-                        file.close()
-                        ic(outData)
-                        if outData["gpio"] == 1 and "gpio" in newi:
+                            # elif outData["gpio"] == 1 and "gpio" in newi:
+                            #     Inputs.append(newi)
+                            # elif outData["spi"] == 1 and "spi" in newi:
+                            #     Inputs.append(newi)
+                            # elif outData["uart"] == 1 and "uart" in newi:
+                            #     Inputs.append(newi)
+                            # elif outData["timer"] == 1 and "timer" in newi:
+                            #     Inputs.append(newi)
+                            # elif outData["spi_flash"] == 1 and "spi_flash" in newi:
+                            #     Inputs.append(newi)
+                            # elif outData["i2c"] == 1 and "i2c" in newi:
+                            #     Inputs.append(newi)
+                        elif "output" in i or "inout" in i:
+                            newi = i.replace(",", "").split()[-1]
+                            # file = open(f"{GENERATOR_DIR}/src/main/scala/config.json", "r")
+                            # outData = json.load(file)
+                            # file.close()
+                            # ic(outData)
+                            # if outData["gpio"] == 1 and "gpio" in newi:
                             Outputs.append(newi)
-                        elif outData["spi"] == 1 and "spi" in newi:
-                            Outputs.append(newi)
-                        elif outData["uart"] == 1 and "uart" in newi:
-                            Outputs.append(newi)
-                        elif outData["timer"] == 1 and "timer" in newi:
-                            Outputs.append(newi)
-                        elif outData["spi_flash"] == 1 and "spi_flash" in newi:
-                            Outputs.append(newi)
-                        elif outData["i2c"] == 1 and "i2c" in newi:
-                            Outputs.append(newi)
-                    
-                    print("newi", newi)
-            elif "module SoCNow(" in i:
-                print("MATHCED", i)
-                n = 1
+                            # elif outData["spi"] == 1 and "spi" in newi:
+                            #     Outputs.append(newi)
+                            # elif outData["uart"] == 1 and "uart" in newi:
+                            #     Outputs.append(newi)
+                            # elif outData["timer"] == 1 and "timer" in newi:
+                            #     Outputs.append(newi)
+                            # elif outData["spi_flash"] == 1 and "spi_flash" in newi:
+                            #     Outputs.append(newi)
+                            # elif outData["i2c"] == 1 and "i2c" in newi:
+                            #     Outputs.append(newi)
+                        
+                        print("newi", newi)
+                elif f"module {top}(" in i:
+                    print("MATHCED", i)
+                    n = 1
+
+        return (Inputs, Outputs)
 
 utils = UTILS()

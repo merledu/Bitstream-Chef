@@ -2,7 +2,7 @@ import eel, tkinter, tkinter.filedialog as tkFileDialog, os, time, shutil
 from eel import init, start
 from fpga import *
 from UTILS import utils
-
+from icecream import ic
 
 global source_files, FPGA
 source_files = []
@@ -44,7 +44,8 @@ def selectTop(top, fpga):
     global FPGA
     FPGA = fpga
     if fpga == "arty-a7-35t":
-        pins = utils.extractIOs(top)
+        pins = utils.extractIOs(top, source_files)
+        ic(pins)
         eel.mapInputs( pins[0] ,list(ARTY_COMPS_i.keys()))
         eel.mapOutputs(pins[1] ,list(ARTY_COMPS_o.keys()))
 
